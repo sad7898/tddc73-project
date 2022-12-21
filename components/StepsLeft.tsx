@@ -1,46 +1,58 @@
 import * as React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+
+import { StepProps } from './Step';
 export interface StepsLeftProps {
-  steps: string[];
-  size: number;
+  size?: number;
+  lineColor?: string;
+  textColor?: string;
+  children?: React.ReactElement<StepProps>[];
 }
 
-export const StepsLeft: React.FC<StepsLeftProps> = ({ steps, size }) => {
-  const circleStyle = StyleSheet.create({
-    circle: {
-      width: size,
-      height: size,
-      borderRadius: size / 2,
-      borderWidth: 1,
-      overflow: 'hidden',
-    },
-  });
+export const StepsLeft: React.FC<StepsLeftProps> = ({
+  size = 14,
+  lineColor = '#6495ed',
+  textColor = '#6495ed',
+  children,
+}) => {
   return (
     <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-      {steps.map((step, indx) => {
-        const hasLine = indx !== 0 && indx !== steps.length - 1;
+      {children?.map((child, indx) => {
+        const hasOneLine = indx !== 0 && indx !== children.length - 1;
         return (
           <View
-            key={step}
+            key={`${indx}-step`}
             style={{
               flexDirection: 'column',
-              flex: 1,
+              flex: hasOneLine ? 3 : 2,
               alignItems: 'flex-start',
             }}>
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
-              <View style={circleStyle.circle} />
-              <View style={{ flex: 1, height: 1, backgroundColor: 'black' }} />
+              <View
+                style={{
+                  flex: 1,
+                  height: 3,
+                  backgroundColor: indx !== 0 ? lineColor : 'transparent',
+                }}
+              />
+              {child}
+              <View
+                style={{
+                  flex: 1,
+                  height: 3,
+                  backgroundColor: indx !== children.length - 1 ? lineColor : 'transparent',
+                }}
+              />
             </View>
+
             <Text
               style={{
-                backgroundColor: 'red',
-                position: 'absolute',
-                top: size,
+                alignSelf: 'center',
                 textAlign: 'center',
+                color: '#6495ed',
                 fontSize: Math.max(16, size / 2),
               }}>
-              {step}
+              {child.props.text}
             </Text>
           </View>
         );
@@ -48,3 +60,24 @@ export const StepsLeft: React.FC<StepsLeftProps> = ({ steps, size }) => {
     </View>
   );
 };
+const circleStyle = StyleSheet.create({
+  circle: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    overflow: 'hidden',
+
+    borderColor: '#6495ed',
+  },
+  complete: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    overflow: 'hidden',
+
+    borderColor: '#6495ed',
+    backgroundColor: '#6495ed',
+  },
+});
