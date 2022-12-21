@@ -1,10 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import { StepsLeft } from './components/StepsLeft';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app! HELLO</Text>
+      <StepsLeft steps={['he', 'llo', 'worldasdasdasdas', 'okok']} size={32} />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +15,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'black',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   },
