@@ -2,20 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import { Step } from './components/Step';
-import { StepsLeft } from './components/StepsLeft';
+import { Step } from './components/StepsLeft/Step';
+import { StepsLeft } from './components/StepsLeft/StepsLeft';
 import { Walkthrough } from './components/Walkthrough/Walkthrough';
 
 export default function App() {
   const [page, setPage] = useState(0);
-  const [maxPage, setMaxPage] = useState(5);
+  const MAX_PAGE = 5;
   return (
     <View style={styles.container}>
       <Walkthrough
         page={page}
         onPageChange={() =>
           setPage((prev) => {
-            if (prev >= maxPage) return prev;
+            if (prev >= MAX_PAGE) return prev;
             return prev + 1;
           })
         }>
@@ -38,7 +38,7 @@ export default function App() {
         </View>
       </Walkthrough>
       <StepsLeft size={32}>
-        {[...Array(maxPage)].map((_, i) => (
+        {[...Array(MAX_PAGE)].map((_, i) => (
           <Step
             onPress={() => setPage(i)}
             isCompleted={page >= i}

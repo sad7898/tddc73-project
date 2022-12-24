@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NativeRouter, Route, Link } from 'react-router-native';
 
-import { Step } from '../Step';
-import { StepsLeft } from '../StepsLeft';
+import { Step } from '../StepsLeft/Step';
+import { StepsLeft } from '../StepsLeft/StepsLeft';
 
 export interface WalkthroughProps {
   children: React.ReactElement[];
