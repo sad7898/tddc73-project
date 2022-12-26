@@ -37,16 +37,18 @@ export default function App() {
           <Text>step 3</Text>
         </View>
       </Walkthrough>
-      <StepsLeft size={32}>
-        {[...Array(MAX_PAGE)].map((_, i) => (
-          <Step
-            onPress={() => setPage(i)}
-            isCompleted={page >= i}
-            key={`stepstep ${i}`}
-            text="hello"
-          />
-        ))}
-      </StepsLeft>
+      <View style={{ maxWidth: 200 }}>
+        <StepsLeft size={32} orientation="vertical">
+          {[...Array(MAX_PAGE)].map((_, i) => (
+            <Step
+              onPress={() => setPage(i)}
+              isCompleted={page >= i}
+              key={`stepstep ${i}`}
+              text="hellopisjgiaerjgpirjgi0wejrg0jwer0gj0ejrgpajfspajsdfajdf"
+            />
+          ))}
+        </StepsLeft>
+      </View>
     </View>
   );
 }
