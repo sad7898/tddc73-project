@@ -12,22 +12,11 @@ export interface WalkthroughProps {
   page: number;
   onPageChange: () => void;
 }
-export const Walkthrough: React.FC<WalkthroughProps> = ({
-  children,
-  buttonStyle = styles.button,
-  page,
-  onPageChange,
-}) => {
+export const Walkthrough: React.FC<WalkthroughProps> = ({ children, page, onPageChange }) => {
   return (
     <View>
-      {children && children[page]}
+      {children && (children[page] || children[children.length - 1])}
       <Button title={page >= children.length - 1 ? 'Finish' : 'Continue'} onPress={onPageChange} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    color: '#f194ff',
-  },
-});
