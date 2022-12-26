@@ -1,17 +1,29 @@
 import { StatusBar } from 'expo-status-bar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+import Article from './components/Article';
+import { Paywall } from './components/Paywall/Paywall';
+import { PaywallContext } from './components/Paywall/withPaywall';
 import { Step } from './components/StepsLeft/Step';
 import { StepsLeft } from './components/StepsLeft/StepsLeft';
 import { Walkthrough } from './components/Walkthrough/Walkthrough';
 
 export default function App() {
   const [page, setPage] = useState(0);
+  const [isPaid, setIsPaid] = useState(false);
+  useEffect(() => {
+    setIsPaid(false);
+  }, []);
   const MAX_PAGE = 5;
   return (
-    <View style={styles.container}>
-      <Walkthrough
+    <PaywallContext.Provider value={{ isPaid }}>
+      <View style={styles.container}>
+        <Article>
+          <Text>Hello world hello</Text>
+        </Article>
+
+        {/* <Walkthrough
         page={page}
         onPageChange={() =>
           setPage((prev) => {
@@ -37,7 +49,7 @@ export default function App() {
           <Text>step 3</Text>
         </View>
       </Walkthrough>
-      <View style={{ maxWidth: 200 }}>
+      <View>
         <StepsLeft size={32} orientation="vertical">
           {[...Array(MAX_PAGE)].map((_, i) => (
             <Step
@@ -48,8 +60,9 @@ export default function App() {
             />
           ))}
         </StepsLeft>
+      </View> */}
       </View>
-    </View>
+    </PaywallContext.Provider>
   );
 }
 
