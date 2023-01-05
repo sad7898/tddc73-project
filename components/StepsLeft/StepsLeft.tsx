@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 
 import { StepProps } from './Step';
 export interface StepsLeftProps {
-  size?: number;
+  fontSize?: number;
   lineColor?: string;
   textColor?: string;
   children?: React.ReactElement<StepProps>[];
@@ -11,7 +11,7 @@ export interface StepsLeftProps {
 }
 
 export const StepsLeft: React.FC<StepsLeftProps> = ({
-  size = 14,
+  fontSize = 14,
   lineColor = '#6495ed',
   textColor = '#6495ed',
   children,
@@ -20,7 +20,12 @@ export const StepsLeft: React.FC<StepsLeftProps> = ({
   const mainFlexDirection = orientation === 'horizontal' ? 'row' : 'column';
   const stepTextFlexDirection = orientation === 'horizontal' ? 'column' : 'row';
   return (
-    <View style={{ flexDirection: mainFlexDirection, justifyContent: 'center' }}>
+    <View
+      style={{
+        flexDirection: mainFlexDirection,
+        justifyContent: 'center',
+        minHeight: orientation === 'horizontal' ? undefined : '100%',
+      }}>
       {children?.map((child, indx) => {
         const hasOneLine = indx !== 0 && indx !== children.length - 1;
         return (
@@ -56,7 +61,7 @@ export const StepsLeft: React.FC<StepsLeftProps> = ({
                 alignSelf: 'center',
                 textAlign: 'center',
                 color: '#6495ed',
-                fontSize: Math.max(16, size / 2),
+                fontSize: fontSize,
               }}>
               {child.props.text}
             </Text>

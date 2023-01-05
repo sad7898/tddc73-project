@@ -1,20 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import * as React from 'react';
-import { useState } from 'react';
-import {
-  Modal,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Text,
-  Pressable,
-  Animated,
-  Dimensions,
-} from 'react-native';
-
-import { Step } from '../StepsLeft/Step';
-import { StepsLeft } from '../StepsLeft/StepsLeft';
-import { Walkthrough } from '../Walkthrough/Walkthrough';
+import { StyleSheet, View, Pressable, Animated, Dimensions, ScrollView } from 'react-native';
 
 export interface PaywallProps {
   children?: React.ReactElement;
@@ -22,7 +8,7 @@ export interface PaywallProps {
   wallStyle?: any;
 }
 
-export const Paywall: React.FC<PaywallProps> = ({ children, onClose }) => {
+export const Paywall: React.FC<PaywallProps> = ({ children, onClose, wallStyle = styles.wall }) => {
   const windowHeight = Dimensions.get('window').height;
   const slideAnim = React.useRef(new Animated.Value(0)).current;
   React.useEffect(() => {
@@ -37,7 +23,7 @@ export const Paywall: React.FC<PaywallProps> = ({ children, onClose }) => {
       <View style={styles.backdrop} />
       <Animated.View
         style={StyleSheet.flatten([
-          styles.wall,
+          wallStyle,
           {
             bottom: slideAnim.interpolate({
               inputRange: [0, 1],
@@ -71,7 +57,6 @@ const styles = StyleSheet.create({
   },
   wall: {
     width: '100%',
-    height: '50%',
     zIndex: 1001,
     position: 'absolute',
     bottom: 0,

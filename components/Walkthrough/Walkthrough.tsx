@@ -1,14 +1,8 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import { NativeRouter, Route, Link } from 'react-router-native';
-
-import { Step } from '../StepsLeft/Step';
-import { StepsLeft } from '../StepsLeft/StepsLeft';
+import { View, Button } from 'react-native';
 
 export interface WalkthroughProps {
   children: React.ReactElement[];
-  buttonStyle?: any;
   page: number;
   onPageChange: () => void;
 }
